@@ -43,11 +43,35 @@ export class EmployeeComponent implements OnInit {
   })
   }
 
-  onEditEmployee(obj:Employees){
+  updateEmployee(){
+    this.employeeService.updateEmployee(this.employeeObject).subscribe((res:IAPIResponceModel)=>{
+      debugger
+        alert("Employee updated successfully");
+        this.getAllEmployees();
+        this.employeeObject = new Employees();
+     
+    },error=>{
+      alert("API error occurred while updating employee");
+  })
+  }
 
+  onEditEmployee(data:Employees){
+    this.employeeObject = data; 
+    this.isFormVisbility.set(true);
   }
   onDeleteEmployee(id:number){
-
+    const isDelete = confirm("Are you sure you want to delete this employee from your account?");
+    if(isDelete){
+      this.employeeService.deleteEmployee(id).subscribe((res:IAPIResponceModel)=>{
+        debugger
+          alert("Employee Deleted successfully");
+          this.getAllEmployees();
+          this.employeeObject = new Employees();
+       
+      },error=>{
+        alert("API error occurred while saving employee");
+    })
+    }
   }
 
   getAllEmployees(){

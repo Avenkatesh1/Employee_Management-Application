@@ -24,6 +24,16 @@ export class EmployeeService {
     return this.http.post<IAPIResponceModel>(this.apiUrl + "CreateEmployee", obj);
   }
 
+  updateEmployee(obj:Employees):Observable<IAPIResponceModel>{
+    debugger
+    return this.http.put<IAPIResponceModel>(this.apiUrl + "UpdateEmployee/" + obj.employeeId, obj);
+  }
+
+  deleteEmployee(id:number):Observable<IAPIResponceModel>{
+    debugger
+    return this.http.delete<IAPIResponceModel>(this.apiUrl + "DeleteEmployee/"+id);
+  }
+
   getAllEmployee():Observable<Employees[]>{
     return this.http.get<Employees[]>(this.apiUrl + "GetAllEmployees");
   }
