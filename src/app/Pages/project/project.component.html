@@ -1,1 +1,82 @@
-<p>project works!</p>
+<div class="container my-4">
+       
+    <div class="tab-pane fade show active" id="projects" role="tabpanel">
+
+        <div class="row">
+            <div class="col-6">
+                <h2>All Projects</h2>
+            </div>
+            <div class="col-6 text-end">
+                <button class="btn btn-success" (click)="isProjectFormVisible.set(true)">Add New-Projects</button>
+            </div>
+        </div>
+
+        <!-- Project Form -->
+         @if (isProjectFormVisible()) {
+            <form class="mb-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="projectName" class="form-label">Project Name</label>
+                        <input type="text" class="form-control" id="projectName" placeholder="Enter project name">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="clientName" class="form-label">Client Name</label>
+                        <input type="text" class="form-control" id="clientName" placeholder="Enter client name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="startDate" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="startDate">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="gender" class="form-label">Lead By Employee ID</label>
+                        <select id="gender" class="form-select" name="contactNo">
+                            <option selected>Select-Employees</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="contactPerson" class="form-label">Contact Person</label>
+                        <input type="text" class="form-control" id="contactPerson" placeholder="Enter contact person name">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="contactNoProject" class="form-label">Contact No</label>
+                        <input type="text" class="form-control" id="contactNoProject" placeholder="Enter contact number">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="contactNoProject" class="form-label">EmailId</label>
+                        <input type="text" class="form-control" id="EmailId" placeholder="Enter Your Email">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary mt-3">Save Projects</button>
+                <button type="button" class="btn btn-warning mt-3 mx-2" (click)="isProjectFormVisible.set(false)">Close</button>
+            </form>
+         }
+        
+
+        <!-- Project Table -->
+        <h3>Project List</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Project ID</th>
+                    <th>Project Name</th>
+                    <th>Client Name</th>
+                    <th>Start Date</th>
+                    <th>Lead By Employee</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data rows go here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Project Employees Tab -->
+ </div>

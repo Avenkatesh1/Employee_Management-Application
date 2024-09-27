@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-project',
@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './project.component.css'
 })
 export class ProjectComponent {
-
+ 
+  isProjectFormVisible = signal<boolean>(false);
 }
