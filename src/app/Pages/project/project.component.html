@@ -13,48 +13,52 @@
 
         <!-- Project Form -->
          @if (isProjectFormVisible()) {
-            <form class="mb-4">
+            <form class="mb-4" [formGroup]="projectForm">
                 <div class="row">
                     <div class="col-md-6">
                         <label for="projectName" class="form-label">Project Name</label>
-                        <input type="text" class="form-control" id="projectName" placeholder="Enter project name">
+                        <input type="text" formControlName="projectName" class="form-control" id="projectName" placeholder="Enter project name">
                     </div>
                     <div class="col-md-6">
                         <label for="clientName" class="form-label">Client Name</label>
-                        <input type="text" class="form-control" id="clientName" placeholder="Enter client name">
+                        <input type="text" formControlName="clientName" class="form-control" id="clientName" placeholder="Enter client name">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <label for="startDate" class="form-label">Start Date</label>
-                        <input type="date" class="form-control" id="startDate">
+                        <input type="date" formControlName="startDate" class="form-control" id="startDate">
                     </div>
                     <div class="col-md-6">
                         <label for="gender" class="form-label">Lead By Employee ID</label>
-                        <select id="gender" class="form-select" name="contactNo">
+                        <select id="gender" class="form-select" formControlName="leadByEmpId" name="contactNo">
                             <option selected>Select-Employees</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Other">Other</option>
+                            @for (item of empList$ | async; track $index) {
+                              <option [value]="item.employeeId">{{item.employeeName}}</option>
+                            }
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <label for="contactPerson" class="form-label">Contact Person</label>
-                        <input type="text" class="form-control" id="contactPerson" placeholder="Enter contact person name">
+                        <input type="text" formControlName="contactPerson" class="form-control" id="contactPerson" placeholder="Enter contact person name">
                     </div>
                     <div class="col-md-4">
                         <label for="contactNoProject" class="form-label">Contact No</label>
-                        <input type="text" class="form-control" id="contactNoProject" placeholder="Enter contact number">
+                        <input type="text" formControlName="contactNo" class="form-control" id="contactNoProject" placeholder="Enter contact number">
                     </div>
                     <div class="col-md-4">
                         <label for="contactNoProject" class="form-label">EmailId</label>
-                        <input type="text" class="form-control" id="EmailId" placeholder="Enter Your Email">
+                        <input type="text" formControlName="emailId" class="form-control" id="EmailId" placeholder="Enter Your Email">
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary mt-3">Save Projects</button>
-                <button type="button" class="btn btn-warning mt-3 mx-2" (click)="isProjectFormVisible.set(false)">Close</button>
+                @if (projectForm.controls['projectId'].value == 0) {
+                    <button type="button" class="btn btn-primary mt-3" (click)="onSave()">Save Projects</button>
+                }@else{
+                     <button type="button" class="btn btn-warning mt-3" (click)="onUpdate()">Update Projects</button>            
+                }
+                <button type="button" class="btn btn-danger mt-3 mx-2" (click)="isProjectFormVisible.set(false)">Close</button>
             </form>
          }
         
@@ -73,7 +77,19 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Data rows go here -->
+                @for (item of projectList(); track $index) {
+                    <tr>
+                        <td>{{$index + 1}}</td>
+                        <td>{{item.projectName}}</td>
+                        <td>{{item.clientName}}</td>
+                        <td>{{item.startDate}}</td>
+                        <td>{{item.leadByEmpId}}</td>
+                        <td>
+                            <button class="btn btn-primary" (click)="onEdit(item.projectId)">Edit</button>
+                            <button class="btn btn-danger mx-2" (click)="onDelete(item.projectId)">Delete</button>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
