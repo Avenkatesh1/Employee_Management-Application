@@ -1,52 +1,103 @@
+<div class="container-fluid my-4">
 
-    <div class="container my-4">
-        
-            <!-- Project Employees Tab -->
-            <div class="tab-pane fade show active" id="project-employees" role="tabpanel">
-                <h2>Project Employees</h2>
-
-                <!-- Project Employee Form -->
-                <form class="mb-4">
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-header bg-info">
                     <div class="row">
-                        <div class="col-md-6">
-                            <label for="projectId" class="form-label">Project ID</label>
-                            <input type="number" class="form-control" id="projectId" placeholder="Enter project ID">
+                        <div class="col-6">
+                            <h3>Project Employees List</h3>
                         </div>
-                        <div class="col-md-6">
-                            <label for="empId" class="form-label">Employee ID</label>
-                            <input type="number" class="form-control" id="empId" placeholder="Enter employee ID">
+                        <div class="col-6 text-end">
+                            <button class="btn btn-success">Add New</button>
                         </div>
                     </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Project Name</th>
+                                <th>E-Name</th>
+                                <th>Date</th>
+                                <th>Role</th>
+                                <th>IsActive</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (item of ProjectEmpList(); track $index) {
+                                <tr>
+                                    <td>{{item.empProjectId}}</td>
+                                    <td>{{item.projectName}}</td>
+                                    <td>{{item.employeeName}}</td>
+                                    <td>{{item.assignedDate | date}}</td>
+                                    <td>{{item.role}}</td>
+                                    <td>{{item.isActive}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm" (click)="onEditEmpProject(item)">Edit</button>
+                                        <button type="button" class="btn btn-danger btn-sm mx-1" (click)="onDeleteEmployee(item.empProjectId)" >Delete</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header bg-info">
                     <div class="row">
-                        <div class="col-md-6">
-                            <label for="assignedDate" class="form-label">Assigned Date</label>
-                            <input type="date" class="form-control" id="assignedDate">
+                        <div class="col-8">
+                            <h3>Pro_Employees</h3>
                         </div>
-                        <div class="col-md-6">
-                            <label for="roleProjectEmployee" class="form-label">Role</label>
-                            <input type="text" class="form-control" id="roleProjectEmployee" placeholder="Enter role">
+                        <div class="col-4 text-end">
+                            <button class="btn btn-success">Close</button>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
-                </form>
-
-                <!-- Project Employees Table -->
-                <h3>Project Employees List</h3>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Emp Project ID</th>
-                            <th>Project ID</th>
-                            <th>Employee ID</th>
-                            <th>Assigned Date</th>
-                            <th>Role</th>
-                            <th>Is Active</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Data rows go here -->
-                    </tbody>
-                </table>
-            </div> 
+                </div>
+                <div class="card-body">
+                    <form class="mb-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="projectId" class="form-label">Project Name</label>
+                                <select name="projectName"  [(ngModel)]="projectEmployeeObject.projectName" id="" class="form-select">
+                                    <option selected>Select Project Name</option>
+                                    @for (item of ProjectList(); track $index) {
+                                        <option [value]="item.projectId">{{item.projectName}}</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="empId" class="form-label">Employee Name</label>
+                                <select name="employeeName"  [(ngModel)]="projectEmployeeObject.employeeName" id="" class="form-select">
+                                    <option selected>Select Employee Name</option>
+                                    @for (item of EmpList(); track $index) {
+                                        <option [value]="item.employeeId">{{item.employeeName}}</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="assignedDate" class="form-label">Assigned Date</label>
+                                <input type="date" name="assignedDate" [(ngModel)]="projectEmployeeObject.assignedDate"  class="form-control" id="assignedDate">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="roleProjectEmployee" class="form-label">Role</label>
+                                <input type="text" class="form-control"  name="role" [(ngModel)]="projectEmployeeObject.role" id="roleProjectEmployee" placeholder="Enter role">
+                            </div>
+                        </div>
+                        @if (projectEmployeeObject.empProjectId == 0) {
+                           <button type="button" class="btn btn-primary mt-3" (click)="onSaveProjectEmployee()">Save Emp-Projects</button>                         
+                        }@else {
+                           <button type="button" class="btn btn-warning mt-3" (click)="onUpdateProjectEmployee()">Update Emp-Projects</button>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
