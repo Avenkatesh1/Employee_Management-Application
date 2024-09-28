@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAPIResponceModel } from '../model/interface/master';
+import { IAPIResponceModel, IDashboard } from '../model/interface/master';
 import { Observable } from 'rxjs';
 import { EmployeeProject, Employees } from '../model/class/employee';
 
@@ -10,6 +10,12 @@ import { EmployeeProject, Employees } from '../model/class/employee';
 export class EmployeeService {
    apiUrl = 'https://projectapi.gerasim.in/api/EmployeeManagement/';
   constructor(private http:HttpClient) { }
+
+  
+  getDashboard():Observable<IDashboard>{
+    return this.http.get<IDashboard>(this.apiUrl + "GetDashboard");
+  }
+
 
   getParentDepartment():Observable<IAPIResponceModel>{
     return this.http.get<IAPIResponceModel>(this.apiUrl + "GetParentDepartment");
