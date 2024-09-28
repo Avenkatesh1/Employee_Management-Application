@@ -6,7 +6,7 @@
           <div class="card-header">Total Employees</div>
           <div class="card-body">
             <h5 class="card-title">Employees</h5>
-            <p class="card-text" id="totalEmployees">0</p>
+            <p class="card-text" id="totalEmployees">{{dashboardList.totalEmployee}}</p>
           </div>
         </div>
       </div>
@@ -17,7 +17,7 @@
           <div class="card-header">Total Projects</div>
           <div class="card-body">
             <h5 class="card-title">Projects</h5>
-            <p class="card-text" id="totalProjects">0</p>
+            <p class="card-text" id="totalProjects">{{dashboardList.totalProject}}</p>
           </div>
         </div>
       </div>
@@ -40,7 +40,12 @@
         <div class="card mb-3">
           <div class="card-header">Latest Projects</div>
           <div class="card-body">
-            <ul id="latestProjects" class="list-group">
+            <ul id="latestProjects" class="list-group px-3">
+              @for (item of ProjectList(); track $index) {
+                <li>
+                  {{item.projectName}}
+                </li>
+              }
               <!-- List of latest projects will be dynamically inserted here -->
             </ul>
           </div>
@@ -52,7 +57,12 @@
         <div class="card mb-3">
           <div class="card-header">Recently Hired Employees</div>
           <div class="card-body">
-            <ul id="recentEmployees" class="list-group">
+            <ul id="recentEmployees" class="list-group px-3">
+              @for (item of empList(); track $index) {
+                <li>
+                  {{item.employeeName}}
+                </li>
+              }
               <!-- List of recent employees will be dynamically inserted here -->
             </ul>
           </div>
