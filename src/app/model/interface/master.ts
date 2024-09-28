@@ -25,3 +25,12 @@ export interface IProject {
     contactNo: string,
     emailId: string
 }
+
+export interface IProjectEmp {
+    empProjectId: number,
+    projectId: number,
+    empId: number,
+    assignedDate: string,
+    role: string,
+    isActive: false,
+}

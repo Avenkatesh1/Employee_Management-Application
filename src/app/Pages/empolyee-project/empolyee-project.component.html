@@ -29,7 +29,7 @@
                         <tbody>
                             @for (item of ProjectEmpList(); track $index) {
                                 <tr>
-                                    <td>{{item.empProjectId}}</td>
+                                    <td>{{$index+1}}</td>
                                     <td>{{item.projectName}}</td>
                                     <td>{{item.employeeName}}</td>
                                     <td>{{item.assignedDate | date}}</td>
