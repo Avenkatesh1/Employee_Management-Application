@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IAPIResponceModel } from '../model/interface/master';
 import { Observable } from 'rxjs';
-import { Employees } from '../model/class/employee';
+import { EmployeeProject, Employees } from '../model/class/employee';
 
 @Injectable({
   providedIn: 'root'
@@ -37,4 +37,20 @@ export class EmployeeService {
   getAllEmployee():Observable<Employees[]>{
     return this.http.get<Employees[]>(this.apiUrl + "GetAllEmployees");
   }
+
+  getAllProjectEmployee():Observable<EmployeeProject[]>{
+    return this.http.get<EmployeeProject[]>(this.apiUrl + "GetAllProjectEmployees");
+  }
+  saveProjectEmployee(obj:EmployeeProject):Observable<IAPIResponceModel>{
+    return this.http.post<IAPIResponceModel>(this.apiUrl + "CreateProjectEmployee", obj);
+  }
+
+  updateProjectEmployee(obj:EmployeeProject):Observable<IAPIResponceModel>{
+    return this.http.put<IAPIResponceModel>(this.apiUrl + "UpdateProjectEmployee/" + obj.empProjectId, obj);
+  }
+
+  deleteProjectEmployee(id:number):Observable<IAPIResponceModel>{
+    return this.http.delete<IAPIResponceModel>(this.apiUrl + "DeleteProjectEmployee/"+id);
+  }
 }
+
