@@ -41,16 +41,16 @@ export class EmployeeService {
   getAllProjectEmployee():Observable<EmployeeProject[]>{
     return this.http.get<EmployeeProject[]>(this.apiUrl + "GetAllProjectEmployees");
   }
-  saveProjectEmployee(obj:EmployeeProject):Observable<IAPIResponceModel>{
-    return this.http.post<IAPIResponceModel>(this.apiUrl + "CreateProjectEmployee", obj);
+  saveProjectEmployee(obj:EmployeeProject):Observable<EmployeeProject>{
+    return this.http.post<EmployeeProject>(this.apiUrl + "CreateProjectEmployee", obj);
   }
 
-  updateProjectEmployee(obj:EmployeeProject):Observable<IAPIResponceModel>{
-    return this.http.put<IAPIResponceModel>(this.apiUrl + "UpdateProjectEmployee/" + obj.empProjectId, obj);
+  updateProjectEmployee(obj:EmployeeProject):Observable<EmployeeProject>{
+    return this.http.put<EmployeeProject>(this.apiUrl + "UpdateProjectEmployee/" + obj.empProjectId, obj);
   }
 
-  deleteProjectEmployee(id:number):Observable<IAPIResponceModel>{
-    return this.http.delete<IAPIResponceModel>(this.apiUrl + "DeleteProjectEmployee/"+id);
+  deleteProjectEmployee(id:number):Observable<EmployeeProject>{
+    return this.http.delete<EmployeeProject>(this.apiUrl + "DeleteProjectEmployee/"+id);
   }
 }
 
